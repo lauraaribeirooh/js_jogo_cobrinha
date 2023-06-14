@@ -100,6 +100,30 @@ function iniciarJogo() {
     }
 // método unshift adiciona como primeiro quadrinho da cobrinha
     snake.unshift(newHead)
+
+if (pontos != snake.length-1) {
+        pontos++;
+        document.getElementById('pontuacao').innerText = pontos;
+    }    
+    
+    if (pontos == pontosProximaFase) {
+        fase++;
+        pontosProximaFase = pontosProximaFase + pontosPorFase;
+
+        time = time - (pontosPorFase * 10);
+        
+        clearInterval(jogo);
+        jogo = setInterval(iniciarJogo, time);
+
+        document.getElementById('fase').innerText = fase;
+        document.getElementById('velocidade').innerText = time; 
+    }
 }
 
-let jogo = setInterval(iniciarJogo, 200);
+let time = 200; 
+let jogo = setInterval(iniciarJogo, time);
+
+let pontos = 0;
+let pontosPorFase = 2
+let pontosProximaFase = pontosPorFase;
+let fase = 1;
